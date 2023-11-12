@@ -1,0 +1,68 @@
+<!-- shop.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин - Название вашего магазина</title>
+    <!-- Подключаем внешний файл стилей -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Подключаем объединенный файл JavaScript для управления магазином и корзиной -->
+    <script type="module" defer src="shop.js"></script>
+    <script type="module" defer src="data.js"></script>
+</head>
+<body>
+
+  <!-- Хедер -->
+  <header>
+    <h1>Название вашего магазина</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="shop.html">Магазин</a></li>
+        <li><a href="checkout.html">Корзина</a></li>
+        <li><a href="login.html">Войти</a></li>
+        <li><a href="registration.html">Регистрация</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Основная часть -->
+  <main>
+    <section>
+      <h2>Магазин</h2>
+      <!-- Контейнер для отображения товаров из JavaScript -->
+      <div id="productList"></div>
+    </section>
+
+    <!-- Контейнер для корзины -->
+    <div id="cartContainer">
+      <section>
+        <h2>Корзина</h2>
+        <!-- Контейнер для отображения товаров из корзины -->
+        <table>
+          <thead>
+            <tr>
+              <th>Название</th>
+              <th>Цена</th>
+              <th>Управление</th>
+            </tr>
+          </thead>
+          <tbody id="cartItems"></tbody>
+        </table>
+        <p>Общая сумма заказа: $<span id="totalAmount">0.00</span></p>
+
+        <!-- Кнопка для перехода на страницу чека -->
+        <button id="checkoutButton">Оформить заказ</button>
+      </section>
+    </div>
+  </main>
+
+  <!-- Футер -->
+  <footer>
+    <p>НТУ "ХПІ", Ганна Медведєва, КН-820</p>
+  </footer>
+
+</body>
+</html>

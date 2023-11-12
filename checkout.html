@@ -1,0 +1,87 @@
+<!-- checkout.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа - Название вашего магазина</title>
+    <!-- Подключаем внешний файл стилей -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Подключаем объединенный файл JavaScript для управления магазином и корзиной -->
+    <script type="module" defer src="shop.js"></script>
+    <!-- Подключаем файл с функциями валидации -->
+    <script type="module" defer src="validations.js"></script>
+</head>
+<body>
+
+  <!-- Хедер -->
+  <header>
+    <h1>Название вашего магазина</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="shop.html">Магазин</a></li>
+        <li><a href="checkout.html">Корзина</a></li>
+        <li><a href="login.html">Войти</a></li>
+        <li><a href="registration.html">Регистрация</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Основная часть -->
+  <main>
+    <section>
+      <h2>Оформление заказа</h2>
+      <p>Список товаров в вашей корзине:</p>
+      <!-- Контейнер для отображения товаров из корзины -->
+      <ul id="checkoutItems"></ul>
+      <p>Общая сумма заказа: $<span id="checkoutTotalAmount">0.00</span></p>
+
+      <!-- Форма для ввода данных пользователя -->
+      <form id="orderForm" onsubmit="return validateForm();">
+        <label for="phone">Номер телефона:</label>
+        <input type="text" id="phone" name="phone" required pattern="\d{10}">
+        <br>
+
+        <label for="address">Адрес:</label>
+        <input type="text" id="address" name="address" required minlength="10">
+        <br>
+
+        <label for="card">Номер карты:</label>
+        <input type="text" id="card" name="card" required pattern="\d{16}">
+        <br>
+
+        <input type="submit" value="Оплатить">
+      </form>
+    </section>
+  </main>
+
+  <!-- Футер -->
+  <footer>
+    <p>НТУ "ХПІ", Ганна Медведєва, КН-820</p>
+  </footer>
+
+  <!-- Скрипт для отображения данных из корзины -->
+  <script type="module" defer>
+    // Инициализация корзины из localStorage
+    const savedCart = localStorage.getItem('cart');
+    const cart = savedCart ? JSON.parse(savedCart) : [];
+
+    // Отображение данных из корзины на странице
+    const checkoutItemsContainer = document.getElementById('checkoutItems');
+    const checkoutTotalAmountSpan = document.getElementById('checkoutTotalAmount');
+    
+    cart.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+        checkoutItemsContainer.appendChild(listItem);
+    });
+
+    // Вычисляем общую сумму заказа
+    const checkoutTotalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+    checkoutTotalAmountSpan.textContent = checkoutTotalAmount.toFixed(2);
+  </script>
+
+</body>
+</html>
